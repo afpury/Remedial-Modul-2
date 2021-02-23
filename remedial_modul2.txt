@@ -1,0 +1,19 @@
+use world;
+
+-- 1
+select * from city where CountryCode = 'IDN' order by population desc limit 10;
+
+-- 2
+select * from city order by population desc limit 10;
+
+-- 3
+select * from country;
+select * from countrylanguage;
+select c.Code, c.Name, Language, IsOfficial, Percentage from countrylanguage a
+join country c on a.CountryCode = c.Code
+where Language = 'English' and IsOfficial = 'T' order by Percentage desc limit 10;
+
+-- 4
+select * from country 
+where Continent = 'Asia' AND LifeExpectancy > (Select AVG(LifeExpectancy) from country where Continent = 'Europe')
+ORDER BY LifeExpectancy desc limit 10;
